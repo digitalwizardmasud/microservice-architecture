@@ -9,6 +9,7 @@ const createInventory = async (req: Request, res: Response, next: NextFunction):
             return res.status(400).json({ error: parsedBody.error.errors });
         }
 
+
         // create inventory 
         const inventory = await prisma.inventory.create({
             data: {
@@ -28,8 +29,10 @@ const createInventory = async (req: Request, res: Response, next: NextFunction):
             }
             
         })
+        console.log(inventory, "✅ inventory")
         return res.status(201).json(inventory);
     }catch(error){
+        console.log(error, "✅ inventory")
          next(error)
     }
 }
