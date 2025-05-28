@@ -37,6 +37,11 @@ app.get("/health", (_req, res)=>{
     res.json({message:"API Gateway is running"})
 })
 
+// Not Found 
+app.use((_req, res)=>{
+    res.status(404).json({message: "Not Found"})
+})
+
 // Error Handler
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction)=>{
     console.error(err.stack)
