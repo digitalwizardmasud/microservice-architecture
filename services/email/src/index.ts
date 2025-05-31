@@ -2,7 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import morgan from 'morgan'
-import { userLogin, userRegisgration, verifyEmail, verifyToken } from './controllers'
+import { getEmails, sendEmail } from './controllers'
 
 
 dotenv.config()
@@ -17,18 +17,16 @@ app.get("/health", (_req, res) => {
 })
 
 // Routes 
-app.post('/auth/registration', userRegisgration)
-app.post('/auth/login', userLogin)
-app.post('/auth/verify-token', verifyToken)
-app.post('/auth/verify-email', verifyEmail)
+app.post('/emails/send', sendEmail)
+app.get('/emails', getEmails)
 
 // Error Handler 
 app.use((_req, res)=>{
     res.status(404).json({ error: "Not Found" })
 })
 
-const PORT = process.env.PORT || 4003
-const serviceName = process.env.SERVICE_NAME || 'Auth-Service'
+const PORT = process.env.PORT || 4005
+const serviceName = process.env.SERVICE_NAME || 'Email-Service'
 
 app.listen(PORT, () => {
   console.log(`${serviceName} is running on port ${PORT}`)

@@ -79,5 +79,5 @@ model VerificationCode{
   type VerificationCodeType @default(ACCOUNT_ACTIVATION)
   issuedAt DateTime @default(now())
   expiresAt DateTime
-  verifiedAt DateTime
+  verifiedAt DateTime?
 }

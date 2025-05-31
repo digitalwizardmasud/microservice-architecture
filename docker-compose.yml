@@ -10,11 +10,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD", "pg_isready", "-U", "auth"]
-      interval: 30s
-      timeout: 30s
-      retries: 3
+   
     
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -28,6 +24,15 @@ services:
       - "5051:443"
     depends_on:
       - postgres
+  
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    restart: on-failure
 
 volumes:
   postgres:
+  mailhog:
